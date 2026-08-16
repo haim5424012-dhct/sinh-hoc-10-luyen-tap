@@ -66,4 +66,13 @@
 - [x] Chọn tiêu đề và mô tả tiếng Anh chuẩn Biology.
 - [x] Thay nội dung hero trên giao diện.
 - [x] Kiểm tra bố cục desktop; bố cục mobile kế thừa responsive CSS hiện có.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Avatar, footer và khóa nhận diện
+
+- [x] Chuẩn bị ảnh hoa sen làm avatar nhận diện.
+- [x] Thêm khẩu hiệu tiếng Anh truyền cảm hứng.
+- [x] Thêm dòng “Liên hệ qua nhà trường”.
+- [x] Khóa phần thông tin giáo viên/trường ở chế độ chỉ xem.
+- [x] Kiểm tra footer và responsive.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
