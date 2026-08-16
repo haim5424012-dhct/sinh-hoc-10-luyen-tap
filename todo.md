@@ -41,4 +41,13 @@
 - [x] Lập trình lưu điểm cục bộ sau khi nộp bài.
 - [x] Bổ sung giao diện sổ điểm/tra cứu điểm.
 - [x] Kiểm thử bộ chọn học sinh, 45 dòng sổ điểm và mã đề; cần bổ sung kiểm thử nộp bài thực tế khi có dữ liệu làm bài.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Tải sổ điểm
+
+- [x] Xác định cấu trúc tệp xuất gần mẫu XLS.
+- [x] Thiết kế dữ liệu điểm trống và điểm đã làm.
+- [x] Thêm nút tải sổ điểm cho giáo viên.
+- [x] Xuất đủ 45 học sinh và thông tin mã đề/điểm.
+- [x] Kiểm thử build, sự xuất hiện của nút và cấu trúc dữ liệu XLSX; cần xác nhận tải trực tiếp trên trình duyệt người dùng.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
