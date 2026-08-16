@@ -59,4 +59,11 @@
 - [x] Đặt mặc định Võ Văn Bé Hai, Tổ Sinh học, THPT Đốc Binh Kiều - Cai Lậy.
 - [x] Kết nối thông tin vào footer và tệp sổ điểm; khu vực header giữ nhận diện ứng dụng Sinh học 10.
 - [x] Kiểm thử lưu, khôi phục và hiển thị responsive.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Cập nhật copy tiếng Anh cho hero
+
+- [x] Chọn tiêu đề và mô tả tiếng Anh chuẩn Biology.
+- [x] Thay nội dung hero trên giao diện.
+- [x] Kiểm tra bố cục desktop; bố cục mobile kế thừa responsive CSS hiện có.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
