@@ -10,6 +10,13 @@ export const matrix = [
   { topic: "Các phân tử sinh học trong tế bào", nb: 3, th: 4, vd: 1, total: 8, mc: 8, tf: 2, points: 4 },
 ];
 
+export const specificationTable = [
+  { topic: "Các cấp độ tổ chức của thế giới sống", knowledge: "Đặc trưng sống; cấp tổ chức; hệ mở", nb: "Nhận diện cấp tổ chức, tế bào, quần xã", th: "Giải thích thứ bậc và hệ mở", vd: "—", form: "8 MC", points: 2 },
+  { topic: "Khái quát về tế bào", knowledge: "Lịch sử và học thuyết tế bào", nb: "Nhận biết nhà khoa học, khái niệm", th: "Giải thích đơn vị cấu trúc/chức năng", vd: "—", form: "8 MC", points: 2 },
+  { topic: "Nguyên tố hóa học và nước", knowledge: "C, H, O, N; nước; nguyên tố vi lượng", nb: "Nhận biết thành phần và liên kết", th: "Giải thích tính phân cực, vai trò nước", vd: "Liên hệ iod và hormone", form: "8 MC", points: 2 },
+  { topic: "Các phân tử sinh học trong tế bào", knowledge: "Carbohydrate, lipid, protein, DNA", nb: "Nhận biết đơn phân, liên kết, cấu tạo", th: "Giải thích chức năng và cấu trúc", vd: "Suy luận từ đặc điểm phân tử", form: "8 MC + 2 Đ/S", points: 4 },
+];
+
 export const sampleExam = {
   id: "de-on-tap-01",
   title: "Đề ôn tập 01 · Sinh học 10",
