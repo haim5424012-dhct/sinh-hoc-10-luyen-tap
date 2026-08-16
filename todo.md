@@ -75,4 +75,12 @@
 - [x] Thêm dòng “Liên hệ qua nhà trường”.
 - [x] Khóa phần thông tin giáo viên/trường ở chế độ chỉ xem.
 - [x] Kiểm tra footer và responsive.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Sửa hiển thị font tiếng Việt
+
+- [x] Kiểm tra font đang tải và các selector tiêu đề.
+- [x] Sửa lỗi tách chữ/dấu và tracking quá rộng.
+- [x] Kiểm tra bảng đặc tả, ma trận, footer và hero.
+- [x] Kiểm thử desktop/mobile.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
