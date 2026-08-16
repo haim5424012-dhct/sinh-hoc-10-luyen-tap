@@ -50,4 +50,13 @@
 - [x] Thêm nút tải sổ điểm cho giáo viên.
 - [x] Xuất đủ 45 học sinh và thông tin mã đề/điểm.
 - [x] Kiểm thử build, sự xuất hiện của nút và cấu trúc dữ liệu XLSX; cần xác nhận tải trực tiếp trên trình duyệt người dùng.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Tùy chỉnh nhận diện giáo viên và trường
+
+- [x] Thiết kế cấu trúc nhận diện lưu bằng localStorage.
+- [x] Thêm khu vực quản trị tùy chỉnh thông tin.
+- [x] Đặt mặc định Võ Văn Bé Hai, Tổ Sinh học, THPT Đốc Binh Kiều - Cai Lậy.
+- [x] Kết nối thông tin vào footer và tệp sổ điểm; khu vực header giữ nhận diện ứng dụng Sinh học 10.
+- [x] Kiểm thử lưu, khôi phục và hiển thị responsive.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
