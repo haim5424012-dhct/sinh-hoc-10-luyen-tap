@@ -19,4 +19,15 @@
 - [x] Thêm màn hình xem ma trận và bảng đặc tả.
 - [x] Thêm chức năng sinh đề theo cấu trúc.
 - [x] Kiểm thử số lượng câu, điểm và mức độ.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Cơ chế trộn nhiều mã đề
+
+- [x] Xác định tiêu chí tương đương giữa các mã đề.
+- [x] Thiết kế seed ổn định cho mã đề 3 chữ số.
+- [ ] Bổ sung ngân hàng dự phòng theo chủ đề và mức độ. (Cần bổ sung thêm câu hỏi gốc để thay câu, hiện đã có xáo trộn câu/phương án.)
+- [x] Xáo trộn câu hỏi và phương án nhưng giữ đáp án chuẩn.
+- [x] Bổ sung nhập/chọn mã đề 101, 102.
+- [x] Kiểm thử cùng mã cho cùng đề và khác mã cho đề khác.
+- [x] Kiểm thử ma trận, điểm và đáp án giữa các mã.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.

@@ -76,5 +76,50 @@ export const sampleExam = {
   ] satisfies TFQuestion[],
 };
 
+export type ExamVariant = Omit<typeof sampleExam, "questions" | "trueFalse" | "id"> & {
+  id: string;
+  code: string;
+  questions: MCQuestion[];
+  trueFalse: TFQuestion[];
+};
+
+function seededRandom(seed: number) {
+  let state = seed >>> 0;
+  return () => {
+    state += 0x6D2B79F5;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function seededShuffle<T>(items: T[], random: () => number) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+export function buildExamVariant(code: string): ExamVariant {
+  const normalized = /^(10[1-9])$/.test(code) ? code : "101";
+  const random = seededRandom(Number(normalized) * 7919);
+  const questions = seededShuffle(sampleExam.questions, random).map((question) => {
+    const optionOrder = seededShuffle(question.options.map((_, index) => index), random);
+    return {
+      ...question,
+      options: optionOrder.map((index) => question.options[index]),
+      answer: optionOrder.indexOf(question.answer),
+    };
+  });
+  const trueFalse = seededShuffle(sampleExam.trueFalse, random).map((question) => ({
+    ...question,
+    statements: seededShuffle(question.statements, random),
+  }));
+  return { ...sampleExam, id: `ma-de-${normalized}`, code: normalized, questions, trueFalse };
+}
+
 export const totalItems = sampleExam.questions.length + sampleExam.trueFalse.length;
 export const totalPoints = sampleExam.mcPoints + sampleExam.tfPoints;
