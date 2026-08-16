@@ -1,25 +1,56 @@
+// Phong thí nghiệm giấy gấp: trang chính dùng bố cục biên tập bất đối xứng, nền kem giấy, xanh rừng và Coral Lab.
+import { useMemo, useState } from "react";
+import { ArrowRight, BookOpen, Check, ChevronLeft, ClipboardCheck, Clock3, FileText, Leaf, RotateCcw, Sparkles, Target, Trophy, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import { matrix, Question, sampleExam } from "@/lib/quizData";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
- */
+type Screen = "home" | "practice" | "result";
+type Attempt = { studentId: string; score: number; correct: number; total: number; at: string };
+
+const STORAGE_KEY = "sinh-hoc-10-attempts";
+
+function readAttempts(): Attempt[] {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; }
+}
+
+function AppMark({ compact = false }: { compact?: boolean }) {
+  return <div className={`flex items-center gap-3 ${compact ? "" : "min-w-max"}`}><div className="brand-mark"><Leaf size={22} strokeWidth={2.2} /></div><div><div className="font-display text-xl leading-none text-forest">Sinh học 10</div>{!compact && <div className="label-caps mt-1 text-teal">Luyện tập có định hướng</div>}</div></div>;
+}
+
+function HomeScreen({ studentId, setStudentId, attempts, onStart }: { studentId: string; setStudentId: (v: string) => void; attempts: Attempt[]; onStart: () => void }) {
+  const latest = attempts[0];
+  return <div className="min-h-screen paper-bg">
+    <header className="site-header"><div className="container flex items-center justify-between gap-6 py-5"><AppMark /><nav className="hidden items-center gap-7 text-sm font-semibold text-forest/70 md:flex"><a href="#bo-de">Bộ đề</a><a href="#ma-tran">Ma trận</a><a href="#lich-su">Lịch sử làm bài</a></nav><div className="student-chip"><span className="dot-live" />{studentId ? `Mã: ${studentId}` : "Chưa nhập mã"}</div></div></header>
+    <main>
+      <section className="hero container"><div className="hero-copy"><div className="eyebrow"><span className="eyebrow-line" />Bàn học Sinh học 10</div><h1>Học đúng phần.<br /><em>Tiến bộ thật.</em></h1><p className="hero-lead">Một không gian luyện tập nhỏ gọn, giúp em làm bài theo ma trận, nhìn rõ điểm mạnh và biết chính xác mình cần ôn lại điều gì.</p><div className="hero-actions"><div className="id-form"><label htmlFor="student-id" className="label-caps">Mã học sinh</label><div className="flex gap-2"><Input id="student-id" value={studentId} onChange={(e) => setStudentId(e.target.value.toUpperCase())} placeholder="VD: SH10-021" maxLength={16} /><Button onClick={onStart} disabled={!studentId.trim()} className="cta-button">Vào đề <ArrowRight size={17} /></Button></div></div></div><p className="privacy-note"><Check size={14} /> Kết quả được lưu riêng trên trình duyệt này</p></div><div className="hero-art"><img src="/manus-storage/sinh-hoc-10-hero_3df22711.jpg" alt="Minh họa bàn học và các cấu trúc sinh học" /><div className="art-note note-top"><span>01</span> Quan sát · Suy luận · Ghi nhớ</div><div className="art-note note-bottom"><Leaf size={14} /> Tế bào là đơn vị của sự sống</div></div></section>
+      <section className="container section-block" id="bo-de"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" />Lộ trình hôm nay</div><h2>Chọn một bài để bắt đầu</h2></div><span className="section-index">01 / 03</span></div><div className="feature-grid"><Card className="exam-card featured-card"><div className="card-topline"><Badge className="badge-coral">Đề mẫu</Badge><span className="card-id">{sampleExam.id}</span></div><div className="card-body-grid"><div><h3>{sampleExam.title}</h3><p>{sampleExam.subtitle}. Gồm câu hỏi nền tảng về thành phần hóa học, cấu trúc tế bào và chuyển hóa vật chất.</p><div className="card-meta"><span><FileText size={15} /> {sampleExam.questions.length} câu</span><span><Clock3 size={15} /> 10 phút</span><span><Target size={15} /> 10 điểm</span></div><Button onClick={onStart} className="text-button">Làm đề mẫu <ArrowRight size={16} /></Button></div><div className="card-illustration"><img src="/manus-storage/sinh-hoc-10-cell-study_08e4ae6c.jpg" alt="Minh họa tế bào thực vật" /></div></div></Card><Card className="mini-card"><div className="mini-icon"><BookOpen size={20} /></div><div><div className="label-caps text-teal">Ôn theo chủ đề</div><h3>3 chuyên đề nền tảng</h3><p>Chọn một mảng kiến thức để luyện ngắn theo mức độ.</p><span className="coming-soon">Sắp mở rộng <Sparkles size={13} /></span></div></Card><Card className="mini-card"><div className="mini-icon orange"><Trophy size={20} /></div><div><div className="label-caps text-teal">Đáp án có giải thích</div><h3>Biết vì sao đúng</h3><p>Đáp án đi kèm diễn giải ngắn, dễ xem lại sau khi nộp.</p><span className="coming-soon">Có trong đề mẫu <Check size={13} /></span></div></Card></div></section>
+      <section className="matrix-section" id="ma-tran"><div className="container matrix-layout"><div><div className="eyebrow"><span className="eyebrow-line" />Bản đồ kiến thức</div><h2>Điểm số có<br /><em>ngữ cảnh.</em></h2><p className="matrix-intro">Mỗi câu hỏi được gắn chủ đề và mức độ nhận thức. Nhờ vậy, điểm tổng không chỉ là một con số mà là một gợi ý ôn tập.</p><div className="matrix-stamp"><span className="stamp-number">10</span><span>điểm<br />toàn bài</span></div></div><div className="matrix-table-wrap"><div className="table-caption"><span>Ma trận đề mẫu 01</span><span>NB · TH · VD</span></div><table><thead><tr><th>Chủ đề</th><th>Nhận biết</th><th>Thông hiểu</th><th>Vận dụng</th><th>Tổng</th></tr></thead><tbody>{matrix.map((row) => <tr key={row.topic}><td>{row.topic}</td><td>{row.nb}</td><td>{row.th}</td><td>{row.vd}</td><td className="total-cell">{row.total}</td></tr>)}</tbody></table><div className="legend"><span><i className="legend-dot green" /> Nhận biết</span><span><i className="legend-dot teal" /> Thông hiểu</span><span><i className="legend-dot coral" /> Vận dụng</span></div></div></div></section>
+      <section className="container history-section" id="lich-su"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" />Dấu vết học tập</div><h2>Lịch sử làm bài</h2></div><span className="section-index">03 / 03</span></div>{latest ? <div className="history-card"><div className="history-icon"><Trophy size={20} /></div><div><div className="label-caps text-teal">Lần gần nhất · {latest.at}</div><h3>{latest.studentId} đạt {latest.score.toFixed(1)} / 10</h3></div><div className="history-right"><span>{latest.correct}/{latest.total} câu đúng</span><Progress value={latest.score * 10} /></div></div> : <div className="empty-history"><ClipboardCheck size={22} /><span>Chưa có lần làm bài nào. Điểm số đầu tiên đang chờ em.</span></div>}</section>
+    </main><footer className="site-footer"><div className="container flex flex-col justify-between gap-4 py-8 sm:flex-row sm:items-center"><AppMark compact /><p>Học để hiểu cơ thể sống · Ôn để tự tin hơn</p></div></footer>
+  </div>;
+}
+
+function PracticeScreen({ studentId, onSubmit, onBack }: { studentId: string; onSubmit: (answers: Record<string, number>) => void; onBack: () => void }) {
+  const [current, setCurrent] = useState(0); const [answers, setAnswers] = useState<Record<string, number>>({}); const q = sampleExam.questions[current];
+  const answered = Object.keys(answers).length; const pct = ((current + 1) / sampleExam.questions.length) * 100;
+  const choose = (index: number) => setAnswers((prev) => ({ ...prev, [q.id]: index }));
+  return <div className="min-h-screen paper-bg"><header className="exam-header"><div className="container flex items-center justify-between gap-4 py-4"><button className="back-link" onClick={onBack}><ChevronLeft size={17} /> Thoát bài</button><AppMark compact /><div className="exam-status"><span>{studentId}</span><span className="status-divider" />Câu {current + 1} / {sampleExam.questions.length}</div></div></header><main className="container practice-wrap"><div className="practice-top"><div><div className="eyebrow"><span className="eyebrow-line" />Đề mẫu 01</div><h1>Nền tảng tế bào</h1></div><div className="timer"><Clock3 size={17} /> Không giới hạn thời gian</div></div><Progress value={pct} className="exam-progress" /><div className="practice-layout"><section className="question-panel"><div className="question-label"><span>Câu {String(current + 1).padStart(2, "0")}</span><Badge className={q.level === "Vận dụng" ? "badge-coral" : "badge-green"}>{q.level}</Badge><span className="topic-label">{q.topic}</span></div><h2>{q.prompt}</h2><div className="options-list">{q.options.map((option, index) => <button key={option} className={`option-row ${answers[q.id] === index ? "selected" : ""}`} onClick={() => choose(index)}><span className="option-letter">{String.fromCharCode(65 + index)}</span><span>{option}</span>{answers[q.id] === index && <Check className="option-check" size={18} />}</button>)}</div><div className="question-actions"><Button variant="ghost" className="prev-button" onClick={() => setCurrent(Math.max(0, current - 1))} disabled={current === 0}><ChevronLeft size={17} /> Câu trước</Button>{current === sampleExam.questions.length - 1 ? <Button className="cta-button" onClick={() => onSubmit(answers)}>Nộp bài <Check size={17} /></Button> : <Button className="cta-button" onClick={() => setCurrent(current + 1)}>Câu tiếp <ArrowRight size={17} /></Button>}</div></section><aside className="question-nav"><div className="label-caps text-teal">Điều hướng câu hỏi</div><div className="number-grid">{sampleExam.questions.map((item, index) => <button key={item.id} className={`number-pill ${index === current ? "active" : ""} ${answers[item.id] !== undefined ? "done" : ""}`} onClick={() => setCurrent(index)}>{index + 1}</button>)}</div><div className="nav-legend"><span><i className="legend-dot green" /> Đã chọn</span><span><i className="legend-dot gray" /> Chưa chọn</span></div><div className="nav-note"><Sparkles size={16} /><p>Đọc kỹ câu hỏi. Nếu phân vân, đánh dấu và quay lại sau.</p></div><div className="answer-count"><strong>{answered}</strong> / {sampleExam.questions.length}<span>câu đã chọn</span></div></aside></div></main></div>;
+}
+
+function ResultScreen({ studentId, answers, onRestart, onHome }: { studentId: string; answers: Record<string, number>; onRestart: () => void; onHome: () => void }) {
+  const result = useMemo(() => { const correct = sampleExam.questions.filter((q) => answers[q.id] === q.answer).length; return { correct, score: (correct / sampleExam.questions.length) * 10 }; }, [answers]);
+  return <div className="min-h-screen paper-bg"><header className="site-header"><div className="container flex items-center justify-between py-5"><AppMark /><span className="student-chip"><span className="dot-live" />Mã: {studentId}</span></div></header><main className="container result-wrap"><div className="result-kicker"><Trophy size={18} /> Kết quả đã ghi nhận trên thiết bị này</div><h1>Em đã hoàn thành<br /><em>một vòng ôn tập.</em></h1><div className="score-grid"><Card className="score-card"><div className="label-caps text-teal">Điểm tổng</div><div className="big-score">{result.score.toFixed(1)}<small>/10</small></div><Progress value={result.score * 10} /><p>{result.correct} câu đúng trên tổng số {sampleExam.questions.length} câu</p></Card><Card className="result-aside"><img src="/manus-storage/sinh-hoc-10-mascot_4ce0bb38.png" alt="Mascot chiếc lá học tập" /><div><div className="label-caps text-teal">Gợi ý tiếp theo</div><h3>Xem lại những câu em chưa chắc</h3><p>Đáp án và giải thích nằm ngay bên dưới để em củng cố khái niệm, không chỉ nhớ đáp án.</p></div></Card></div><section className="review-section"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" />Đối chiếu câu trả lời</div><h2>Đáp án & giải thích</h2></div><span className="section-index">{result.correct} / {sampleExam.questions.length} đúng</span></div><div className="review-list">{sampleExam.questions.map((q, index) => { const isCorrect = answers[q.id] === q.answer; return <div className={`review-item ${isCorrect ? "correct" : "wrong"}`} key={q.id}><div className="review-icon">{isCorrect ? <Check size={17} /> : <X size={17} />}</div><div className="review-content"><div className="review-meta"><strong>Câu {index + 1}</strong><span>{q.topic}</span><Badge className={q.level === "Vận dụng" ? "badge-coral" : "badge-green"}>{q.level}</Badge></div><h3>{q.prompt}</h3><p><strong>Đáp án: {q.options[q.answer]}</strong> · {q.explanation}</p></div></div>; })}</div></section><div className="result-actions"><Button className="cta-button" onClick={onRestart}><RotateCcw size={17} /> Làm lại đề</Button><Button variant="outline" className="secondary-button" onClick={onHome}>Về trang chủ</Button></div></main></div>;
+}
+
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
-    </div>
-  );
+  const [screen, setScreen] = useState<Screen>("home"); const [studentId, setStudentId] = useState(""); const [answers, setAnswers] = useState<Record<string, number>>({}); const [attempts, setAttempts] = useState<Attempt[]>(readAttempts);
+  const start = () => { if (studentId.trim()) setScreen("practice"); };
+  const submit = (submitted: Record<string, number>) => { setAnswers(submitted); const correct = sampleExam.questions.filter((q) => submitted[q.id] === q.answer).length; const next = [{ studentId, score: correct / sampleExam.questions.length * 10, correct, total: sampleExam.questions.length, at: new Date().toLocaleDateString("vi-VN") }, ...attempts].slice(0, 8); setAttempts(next); localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); setScreen("result"); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  if (screen === "practice") return <PracticeScreen studentId={studentId} onSubmit={submit} onBack={() => setScreen("home")} />;
+  if (screen === "result") return <ResultScreen studentId={studentId} answers={answers} onRestart={() => { setAnswers({}); setScreen("practice"); }} onHome={() => setScreen("home")} />;
+  return <HomeScreen studentId={studentId} setStudentId={setStudentId} attempts={attempts} onStart={start} />;
 }
