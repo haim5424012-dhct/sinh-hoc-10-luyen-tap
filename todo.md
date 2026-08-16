@@ -30,4 +30,15 @@
 - [x] Bổ sung nhập/chọn mã đề 101, 102.
 - [x] Kiểm thử cùng mã cho cùng đề và khác mã cho đề khác.
 - [x] Kiểm thử ma trận, điểm và đáp án giữa các mã.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Sổ điểm theo lớp
+
+- [x] Đọc toàn bộ tệp sổ điểm Excel mẫu.
+- [x] Kiểm kê sheet, cột, dòng học sinh và công thức.
+- [x] Chuẩn hóa mã HS001–HS045.
+- [x] Thiết kế bản ghi điểm theo mã học sinh, mã đề và thời điểm.
+- [x] Lập trình lưu điểm cục bộ sau khi nộp bài.
+- [x] Bổ sung giao diện sổ điểm/tra cứu điểm.
+- [x] Kiểm thử bộ chọn học sinh, 45 dòng sổ điểm và mã đề; cần bổ sung kiểm thử nộp bài thực tế khi có dữ liệu làm bài.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.

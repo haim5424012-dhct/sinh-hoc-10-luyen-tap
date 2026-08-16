@@ -3,6 +3,8 @@ export type QuestionLevel = "Nhận biết" | "Thông hiểu" | "Vận dụng";
 export type MCQuestion = { id: string; topic: string; level: QuestionLevel; prompt: string; options: string[]; answer: number; explanation: string; source: string };
 export type TFQuestion = { id: string; topic: string; prompt: string; statements: { text: string; answer: boolean; explanation: string }[]; source: string };
 
+export const studentIds = Array.from({ length: 45 }, (_, index) => `HS${String(index + 1).padStart(3, "0")}`);
+
 export const matrix = [
   { topic: "Các cấp độ tổ chức của thế giới sống", nb: 5, th: 3, vd: 0, total: 8, mc: 8, tf: 0, points: 2 },
   { topic: "Khái quát về tế bào", nb: 4, th: 4, vd: 0, total: 8, mc: 8, tf: 0, points: 2 },
