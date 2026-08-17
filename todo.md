@@ -92,4 +92,13 @@
 - [x] Cập nhật base path cho repository Pages.
 - [ ] Build và triển khai lại workflow. (Sẽ chạy sau checkpoint đồng bộ.)
 - [ ] Kiểm tra trang thực tế và console/network.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Sửa router GitHub Pages
+
+- [x] Kiểm tra App.tsx và cơ chế Wouter hiện tại.
+- [x] Cấu hình base router cho GitHub Pages.
+- [x] Giữ preview Manus hoạt động ở root.
+- [x] Build và kiểm tra route trang chủ.
+- [ ] Triển khai lại GitHub Actions và kiểm tra URL.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
