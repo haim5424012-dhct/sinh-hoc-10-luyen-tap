@@ -206,6 +206,9 @@ function vitePluginStorageProxy(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
+  // GitHub Pages serves this project under /sinh-hoc-10-luyen-tap/.
+  // Keep the Manus preview at root while emitting correct asset URLs for Pages.
+  base: process.env.GITHUB_ACTIONS ? "/sinh-hoc-10-luyen-tap/" : "/",
   plugins,
   resolve: {
     alias: {

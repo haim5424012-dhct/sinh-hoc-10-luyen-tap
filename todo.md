@@ -83,4 +83,13 @@
 - [x] Sửa lỗi tách chữ/dấu và tracking quá rộng.
 - [x] Kiểm tra bảng đặc tả, ma trận, footer và hero.
 - [x] Kiểm thử desktop/mobile.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Sửa trang trắng trên GitHub Pages
+
+- [x] Kiểm tra vite.config và base path hiện tại.
+- [x] Kiểm tra đường dẫn asset/bundle sau build.
+- [x] Cập nhật base path cho repository Pages.
+- [ ] Build và triển khai lại workflow. (Sẽ chạy sau checkpoint đồng bộ.)
+- [ ] Kiểm tra trang thực tế và console/network.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
