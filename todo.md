@@ -101,4 +101,14 @@
 - [x] Giữ preview Manus hoạt động ở root.
 - [x] Build và kiểm tra route trang chủ.
 - [ ] Triển khai lại GitHub Actions và kiểm tra URL.
+- [x] Lưu checkpoint và bàn giao phiên bản mới.
+
+## Sửa 404 và tài sản GitHub Pages
+
+- [x] Kiểm tra tất cả URL avatar/hero/logo trong mã nguồn.
+- [x] Kiểm tra router và fallback khi tải trực tiếp đường dẫn Pages.
+- [x] Chuyển URL tài sản Manus storage sang URL HTTPS đầy đủ hoạt động ngoài repository.
+- [x] Thêm base router Wouter; website hiện không dùng route con nên không cần fallback HTML riêng.
+- [x] Build và kiểm tra tài sản sau build.
+- [ ] Triển khai lại và kiểm tra trang thực tế.
 - [ ] Lưu checkpoint và bàn giao phiên bản mới.
